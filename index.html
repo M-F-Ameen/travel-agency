@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <!-- Site Title-->
+    <title>Home</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <!-- Stylesheets -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Oswald:200,400%7CLato:300,400,300italic,700%7CMontserrat:900"
+    />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    
+    <!-- Custom Trips Table Styles -->
+    <style>
+      .trips-table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);
+        border: 1px solid #D4AF37;
+        background: #ffffff;
+      }
+      
+      .trips-table thead th {
+        background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+        color: #2c3e50;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: none;
+        padding: 15px 12px;
+        font-size: 13px;
+        text-align: center;
+      }
+      
+      .trips-table tbody tr {
+        transition: background-color 0.3s ease;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      }
+      
+      .trips-table tbody tr:hover {
+        background-color: rgba(212, 175, 55, 0.05);
+      }
+      
+      .trip-info {
+        padding: 5px 0;
+      }
+      
+      .trip-name {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 3px;
+        font-size: 15px;
+        transition: color 0.3s ease;
+      }
+      
+      .trips-table tbody tr:hover .trip-name {
+        color: #D4AF37;
+      }
+      
+      .trip-duration {
+        color: #7f8c8d;
+        font-size: 11px;
+        font-style: italic;
+      }
+      
+      .badge {
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        border-radius: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        transition: transform 0.2s ease;
+      }
+      
+      .badge:hover {
+        transform: scale(1.05);
+      }
+      
+      .trips-table td {
+        vertical-align: middle;
+        padding: 15px 12px;
+        text-align: center;
+        border: none;
+      }
+      
+      .trips-table td strong {
+        color: #D4AF37;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      
+      .btn {
+        border-radius: 20px;
+        padding: 6px 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        font-size: 11px;
+        transition: all 0.3s ease;
+        border: 1px solid #D4AF37;
+      }
+      
+      .btn-secondary {
+        background: #D4AF37;
+        color: #2c3e50;
+      }
+      
+      .btn-secondary:hover {
+        background: #FFD700;
+        border-color: #FFD700;
+        color: #2c3e50;
+      }
+      
+      .btn-outline-secondary {
+        background: transparent;
+        color: #D4AF37;
+        border-color: #D4AF37;
+      }
+      
+      .btn-outline-secondary:hover {
+        background: #D4AF37;
+        color: #2c3e50;
+      }
+      
+      .section-header h3 {
+        color: #2c3e50;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+      
+      .section-header h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 2px;
+        background: #D4AF37;
+      }
+      
+      /* Custom 5-per-row layout */
+      .col-5-per-row {
+        flex: 0 0 20%;
+        max-width: 20%;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-bottom: 30px;
+        display: flex;
+      }
+      
+      .event-default-wrap {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .event-default {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 
+          0 2px 4px rgba(0, 0, 0, 0.08),
+          0 8px 16px rgba(0, 0, 0, 0.1),
+          0 16px 32px rgba(0, 0, 0, 0.12),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        transform-style: preserve-3d;
+      }
+      
+      .event-default:hover {
+        transform: translateY(-5px);
+        box-shadow: 
+          0 4px 8px rgba(0, 0, 0, 0.12),
+          0 12px 24px rgba(0, 0, 0, 0.15),
+          0 24px 48px rgba(0, 0, 0, 0.18),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+      
+      .event-default::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.08) 0%, 
+          transparent 50%, 
+          rgba(0, 0, 0, 0.02) 100%);
+        border-radius: 12px;
+        pointer-events: none;
+        z-index: 1;
+      }
+      
+      .event-default-image {
+        position: relative;
+        overflow: hidden;
+        margin: 0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .event-default-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+      
+      .event-default:hover .event-default-image img {
+        transform: scale(1.05);
+      }
+      
+      .event-default-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        padding: 20px;
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+        z-index: 1;
+      }
+      
+      .event-default:hover .event-default-overlay {
+        transform: translateY(-100%);
+      }
+      
+      .event-default-overlay h5 {
+        margin: 0 0 8px 0;
+      }
+      
+      .event-default-overlay p {
+        margin: 0 0 12px 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      
+      .event-default-overlay .heading-5 {
+        display: block;
+        margin-bottom: 15px;
+        color: #D4AF37;
+        font-weight: 600;
+      }
+      
+      .event-default-button {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+        color: #2c3e50;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        transition: all 0.3s ease;
+        z-index: 5;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+      
+      .event-default-button:hover {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        transform: translateX(-50%) translateY(-2px);
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+      }
+      
+      @media (max-width: 991px) {
+        .col-5-per-row {
+          flex: 0 0 33.333%;
+          max-width: 33.333%;
+        }
+      }
+      
+      @media (max-width: 767px) {
+        .col-5-per-row {
+          flex: 0 0 50%;
+          max-width: 50%;
+        }
+      }
+      
+      @media (max-width: 575px) {
+        .col-5-per-row {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
+      }
+      
+      /* Latest Trips section image sizing fix */
+      .post-blog-image {
+        position: relative;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        height: 250px; /* Fixed height for all images */
+      }
+      
+      .post-blog-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures images cover the area without distortion */
+        object-position: center;
+        transition: transform 0.3s ease;
+      }
+      
+      .post-blog:hover .post-blog-image img {
+        transform: scale(1.05);
+      }
+      
+      /* Ensure consistent carousel item dimensions */
+      .owl-carousel-team .post-blog {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      
+      .owl-carousel-team .post-blog-caption {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 20px;
+        background: #fff;
+        min-height: 150px;
+      }
+      
+      /* Rounded testimonial images */
+      .quote-boxed-image {
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        border: 3px solid #D4AF37;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 210px !important;
+        height: 210px !important;
+        overflow: hidden !important;
+      }
+      
+      /* Force circular shape for all testimonial images */
+      .quote-boxed-aside img {
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        width: 210px !important;
+        height: 210px !important;
+      }
+      
+      /* Footer social media icons fix */
+      .page-footer .group-xs.group-middle {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+      }
+      
+      .page-footer .group-xs.group-middle li {
+        display: inline-block !important;
+        margin: 0 !important;
+        list-style: none !important;
+      }
+      
+      .page-footer .group-xs.group-middle li a {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      
+      /* Mobile responsive for social icons */
+      @media (max-width: 767px) {
+        .page-footer .text-xl-right {
+          text-align: center !important;
+        }
+        
+        .page-footer .group-xs.group-middle {
+          justify-content: center !important;
+          margin-top: 15px !important;
+        }
+      }
+    </style>
+    <!--[if lt IE 10]>
+      <div
+        style="
+          background: #212121;
+          padding: 10px 0;
+          box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.3);
+          clear: both;
+          text-align: center;
+          position: relative;
+          z-index: 1;
+        "
+      >
+        <a href="http://windows.microsoft.com/en-US/internet-explorer/"
+          ><img
+            src="images/ie8-panel/warning_bar_0000_us.jpg"
+            border="0"
+            height="42"
+            width="820"
+            alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."
+        /></a>
+      </div>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- Page preloader-->
+    <div class="page-loader">
+      <div class="page-loader-body">
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page-->
+    <div class="page">
+      <!-- Page Header-->
+      <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap rd-navbar-corporate">
+          <nav
+            class="rd-navbar"
+            data-layout="rd-navbar-fixed"
+            data-sm-layout="rd-navbar-fixed"
+            data-md-layout="rd-navbar-fixed"
+            data-md-device-layout="rd-navbar-fixed"
+            data-lg-layout="rd-navbar-fullwidth"
+            data-xl-layout="rd-navbar-static"
+            data-lg-device-layout="rd-navbar-fixed"
+            data-xl-device-layout="rd-navbar-static"
+            data-md-stick-up-offset="130px"
+            data-lg-stick-up-offset="100px"
+            data-stick-up="true"
+            data-sm-stick-up="true"
+            data-md-stick-up="true"
+            data-lg-stick-up="true"
+            data-xl-stick-up="true"
+          >
+            <div
+              class="rd-navbar-collapse-toggle"
+              data-rd-navbar-toggle=".rd-navbar-collapse"
+            >
+              <span></span>
+            </div>
+            <div class="rd-navbar-top-panel rd-navbar-collapse novi-background">
+              <div class="rd-navbar-top-panel-inner">
+                <ul class="list-inline">
+                  <li class="box-inline list-inline-item">
+                    <span
+                      class="icon novi-icon icon-md-smaller icon-secondary mdi mdi-phone"
+                    ></span>
+                    <ul class="list-comma">
+                      <li><a href="tel:#">+20 10 09059295</a></li>
+                      <li><a href="tel:#">+20 10 93725768</a></li>
+                    </ul>
+                  </li>
+                  <li class="box-inline list-inline-item">
+                    <span
+                      class="icon novi-icon icon-md-smaller icon-secondary mdi mdi-map-marker"
+                    ></span
+                    ><a href="#"
+                      >Huradah Egypt main street 111</a
+                    >
+                  </li>
+                  <li class="box-inline list-inline-item">
+                    <span
+                      class="icon novi-icon icon-md-smaller icon-secondary mdi mdi-email"
+                    ></span
+                    ><a href="mailto:#">mail@demolink.org</a>
+                  </li>
+                </ul>
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <a
+                      class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook"
+                      href="#"
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a
+                      class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter"
+                      href="#"
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a
+                      class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram"
+                      href="#"
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a
+                      class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus"
+                      href="#"
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a
+                      class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin"
+                      href="#"
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="rd-navbar-top-panel-inner">
+                <a
+                  class="button button-sm button-secondary button-nina"
+                  href="https://www.templatemonster.com/website-templates/62466.html"
+                  target="_blank"
+                  >buy template now</a
+                >
+              </div>
+            </div>
+            <div class="rd-navbar-inner">
+              <!-- RD Navbar Panel-->
+              <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button
+                  class="rd-navbar-toggle"
+                  data-rd-navbar-toggle=".rd-navbar-nav-wrap"
+                >
+                  <span></span>
+                </button>
+                <!-- RD Navbar Brand-->
+                <div class="rd-navbar-brand">
+                  <a class="brand-name" href="index.html"
+                    ><img
+                      class="logo-default"
+                      src="images/logo/logo.png"
+                      alt="Sealine Travel Logo"
+                      width="208"
+                      height="46" /><img
+                      class="logo-inverse"
+                      src="images/logo/logo.png"
+                      alt="Sealine Travel Logo"
+                      width="208"
+                      height="46"
+                  /></a>
+                </div>
+              </div>
+              <div class="rd-navbar-aside-center">
+                <div class="rd-navbar-nav-wrap">
+                  <!-- RD Navbar Nav-->
+                  <ul class="rd-navbar-nav">
+                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    
+                  
+                  </ul>
+                </div>
+              </div>
+              <div class="rd-navbar-aside-right">
+                <a
+                  class="button button-sm button-secondary button-nina"
+                  href="#"
+                  >Book a tour now</a
+                >
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <section class="section">
+        <div class="swiper-form-wrap">
+          <!-- Swiper-->
+          <div
+            class="swiper-container swiper-slider swiper-slider_height-1 swiper-align-left swiper-align-left-custom context-dark bg-gray-darker"
+            data-loop="false"
+            data-autoplay="5500"
+            data-simulate-touch="false"
+            data-slide-effect="fade"
+          >
+            <div class="swiper-wrapper">
+              <div
+                class="swiper-slide"
+                data-slide-bg="real%20images/swiper/pexels-bassel-zaki-706250525-18614692.jpg"
+              >
+                <div class="swiper-slide-caption">
+                  <div class="container container-bigger swiper-main-section">
+                    <div
+                      class="row row-fix justify-content-sm-center justify-content-md-start"
+                    >
+                      <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
+                        <h3>Hundreds of Amazing Destinations</h3>
+                        <div class="divider divider-decorate"></div>
+                        <p class="text-spacing-sm">
+                          We offer a variety of destinations to travel to,
+                          ranging from exotic to some extreme ones. They include
+                          very popular countries and cities like Paris, Rio de
+                          Janeiro, Cairo and a lot of others.
+                        </p>
+                        <a
+                          class="button button-default-outline button-nina button-sm"
+                          href="#"
+                          >book now</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="swiper-slide"
+                data-slide-bg="real%20images/swiper/pexels-freestockpro-1540108.jpg"
+              >
+                <div class="swiper-slide-caption">
+                  <div class="container container-bigger swiper-main-section">
+                    <div
+                      class="row row-fix justify-content-sm-center justify-content-md-start"
+                    >
+                      <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
+                        <h3>The Trip of Your Dream</h3>
+                        <div class="divider divider-decorate"></div>
+                        <p class="text-spacing-sm">
+                          Our travel agency is ready to offer you an exciting
+                          vacation that is designed to fit your own needs and
+                          wishes. Whether it’s an exotic cruise or a trip to
+                          your favorite resort, you will surely have the best
+                          experience.
+                        </p>
+                        <a
+                          class="button button-default-outline button-nina button-sm"
+                          href="#"
+                          >book now</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="swiper-slide"
+                data-slide-bg="real%20images/swiper/pexels-marcel-winger-1281376-2445852.jpg"
+              >
+                <div class="swiper-slide-caption">
+                  <div class="container container-bigger swiper-main-section">
+                    <div
+                      class="row row-fix justify-content-sm-center justify-content-md-start"
+                    >
+                      <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
+                        <h3>unique Travel Insights</h3>
+                        <div class="divider divider-decorate"></div>
+                        <p class="text-spacing-sm">
+                          Our team is ready to provide you with unique weekly
+                          travel insights that include photos, videos, and
+                          articles about untravelled tourist paths. We know
+                          everything about the places you’ve never been to!
+                        </p>
+                        <a
+                          class="button button-default-outline button-nina button-sm"
+                          href="#"
+                          >book now</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Swiper controls-->
+            <div class="swiper-pagination-wrap">
+              <div class="container container-bigger">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="swiper-pagination"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="container container-bigger form-request-wrap form-request-wrap-modern"
+          >
+            <div
+              class="row row-fix justify-content-sm-center justify-content-lg-end"
+            >
+            
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trips Table Section -->
+    
+
+      <section
+        class="section section-variant-1 bg-default novi-background bg-cover"
+      >
+        <div class="container container-wide">
+          <div
+            class="row row-fix justify-content-xl-end row-30 text-center text-xl-left"
+          >
+            <div class="col-xl-8">
+              <div class="parallax-text-wrap">
+                <!-- <h3>Our Best Tours</h3> -->
+                <span class="parallax-text">Hot tours</span>
+              </div>
+            
+            </div>
+           
+          </div>
+          <div class="row row-50">
+            <!-- Tours will be loaded dynamically via JavaScript -->
+            <div class="col-12" style="text-align: center; padding: 60px 20px;">
+              <div style="font-size: 3rem; margin-bottom: 20px;">⏳</div>
+              <h3 style="color: #2c3e50; margin-bottom: 15px;">Loading Amazing Tours...</h3>
+              <p style="color: #7f8c8d; font-size: 1.1rem;">Discover incredible destinations from our database</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- our advantages-->
+      <section
+        class="section section-lg bg-gray-lighter novi-background bg-cover text-center"
+      >
+        <div class="container container-wide">
+          <h3>our services</h3>
+          <div class="divider divider-decorate"></div>
+          <div class="row row-50 justify-content-sm-center text-left">
+            <div class="col-sm-10 col-md-6 col-xl-3">
+              <article class="box-minimal box-minimal-border">
+                <div class="box-minimal-icon novi-icon mdi mdi-car"></div>
+                <p class="big box-minimal-title">Transportations</p>
+                <hr />
+                <div class="box-minimal-text text-spacing-sm">
+                  We provide reliable and comfortable transportation services including airport transfers, private car rentals, and luxury vehicle options to ensure your travel is seamless and stress-free.
+                </div>
+              </article>
+            </div>
+            <div class="col-sm-10 col-md-6 col-xl-3">
+              <article class="box-minimal box-minimal-border">
+                <div class="box-minimal-icon novi-icon mdi mdi-map-marker"></div>
+                <p class="big box-minimal-title">Tour Guiding</p>
+                <hr />
+                <div class="box-minimal-text text-spacing-sm">
+                  Our professional tour guides are knowledgeable locals who provide insightful commentary, historical context, and personalized attention to make your sightseeing experiences truly memorable and educational.
+                </div>
+              </article>
+            </div>
+            <div class="col-sm-10 col-md-6 col-xl-3">
+              <article class="box-minimal box-minimal-border">
+                <div class="box-minimal-icon novi-icon mdi mdi-compass"></div>
+                <p class="big box-minimal-title">Exploring</p>
+                <hr />
+                <div class="box-minimal-text text-spacing-sm">
+                  Discover hidden gems and off-the-beaten-path destinations with our curated exploration packages. From adventure activities to cultural immersion, we help you explore the world like never before.
+                </div>
+              </article>
+            </div>
+            <div class="col-sm-10 col-md-6 col-xl-3">
+              <article class="box-minimal box-minimal-border">
+                <div class="box-minimal-icon novi-icon mdi mdi-star"></div>
+                <p class="big box-minimal-title">Luxury</p>
+                <hr />
+                <div class="box-minimal-text text-spacing-sm">
+                  Experience the pinnacle of comfort and elegance with our luxury travel services. From VIP airport lounges to five-star accommodations and exclusive experiences, we cater to discerning travelers seeking the best.
+                </div>
+              </article>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tips & tricks-->
+      <section
+        class="section section-lg novi-background bg-cover bg-default text-center"
+      >
+        <div class="container-wide">
+          <div class="row row-50">
+            <div class="col-sm-12">
+              <h3>Latest Trips</h3>
+              <div class="divider divider-decorate"></div>
+              <!-- Owl Carousel-->
+              <div
+                class="owl-carousel owl-carousel-team owl-carousel-inset"
+                data-items="1"
+                data-md-items="2"
+                data-xl-items="3"
+                data-stage-padding="15"
+                data-loop="true"
+                data-margin="30"
+                data-mouse-drag="false"
+                data-dots="true"
+                data-autoplay="true"
+              >
+                <article class="post-blog">
+                  <a class="post-blog-image" href="#"
+                    ><img
+                      src="real%20images/08.webp"
+                      alt=""
+                      width="570"
+                      height="415"
+                  /></a>
+                  <div class="post-blog-caption">
+                   
+                    <div class="post-blog-caption-body">
+                      <h5>
+                        <a class="post-blog-title" href="#"
+                          >Top 10 Hotels to Stay At: Exclusive Rating by Sealine
+                          Travel Experts</a
+                        >
+                      </h5>
+                    </div>
+                    
+                  </div>
+                </article>
+                <article class="post-blog">
+                  <a class="post-blog-image" href="#"
+                    ><img
+                      src="real%20images/pyramid-sky-desert-ancient.jpg"
+                      alt=""
+                      width="570"
+                      height="415"
+                  /></a>
+                  <div class="post-blog-caption">
+                    
+                    <div class="post-blog-caption-body">
+                      <h5>
+                        <a class="post-blog-title" href="#"
+                          >How to Plan Your Vacation in Advance and Why It’s
+                          Beneficial</a
+                        >
+                      </h5>
+                    </div>
+                 
+                  </div>
+                </article>
+                <article class="post-blog">
+                  <a class="post-blog-image" href="#"
+                    ><img
+                      src="real%20images/istockphoto-1085592710-612x612.webp"
+                      alt=""
+                      width="570"
+                      height="415"
+                  /></a>
+                  <div class="post-blog-caption">
+                   
+                    <div class="post-blog-caption-body">
+                      <h5>
+                        <a class="post-blog-title" href="#"
+                          >Your Personal Guide to 5 Best Places to Visit on
+                          Earth</a
+                        >
+                      </h5>
+                    </div>
+                    
+                  </div>
+                </article>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section section-lg text-center bg-gray-lighter novi-background bg-cover"
+      >
+        <div class="container container-bigger">
+          <h3>testimonials</h3>
+          <div class="divider divider-decorate"></div>
+          <!-- Owl Carousel-->
+          <div
+            class="owl-carousel owl-layout-1"
+            data-items="1"
+            data-dots="true"
+            data-nav="true"
+            data-stage-padding="0"
+            data-loop="true"
+            data-margin="30"
+            data-mouse-drag="false"
+            data-autoplay="true"
+          >
+            <article class="quote-boxed">
+              <div class="quote-boxed-aside">
+                <img
+                  class="quote-boxed-image"
+                  src="people/german-man-e1667049786334-1024x681.jpg"
+                  alt="Ann McMillan"
+                  width="210"
+                  height="210"
+                />
+              </div>
+              <div class="quote-boxed-main">
+                <div class="quote-boxed-text">
+                  <p>
+                    My experience traveling to Egypt with Sealine Travel was absolutely unforgettable! The pyramids of Giza were breathtaking up close, and walking among these ancient wonders took me back thousands of years. Our expert guide made the history come alive, explaining the construction techniques and daily life of the pharaohs. The accommodations in Cairo were luxurious and comfortable. I'll never forget riding a camel at sunset against the desert backdrop - it was pure magic!
+                  </p>
+                </div>
+                <div class="quote-boxed-meta">
+                  <p class="quote-boxed-cite">Ann McMillan</p>
+                  <p class="quote-boxed-small">Regular Customer</p>
+                </div>
+              </div>
+            </article>
+            <article class="quote-boxed">
+              <div class="quote-boxed-aside">
+                <img
+                  class="quote-boxed-image"
+                  src="people/photo-1438761681033-6461ffad8d80.jfif"
+                  alt="Debra Ortega"
+                  width="210"
+                  height="210"
+                />
+              </div>
+              <div class="quote-boxed-main">
+                <div class="quote-boxed-text">
+                  <p>
+                    Visiting the Nile Valley and Alexandria with Sealine Travel was a dream come true! Sailing on a traditional felucca at sunset while watching the sun set behind ancient temples was pure magic. Our guide's stories about Cleopatra and the pharaohs brought the ancient world to life. The temples of Luxor and Karnak were absolutely magnificent - walking through courtyards built thousands of years ago gave me chills. The hospitality, food, and attention to detail in every aspect of the tour made this an unforgettable journey through Egypt's rich history.
+                  </p>
+                </div>
+                <div class="quote-boxed-meta">
+                  <p class="quote-boxed-cite">Debra Ortega</p>
+                  <p class="quote-boxed-small">Regular Customer</p>
+                </div>
+              </div>
+            </article>
+            <article class="quote-boxed">
+              <div class="quote-boxed-aside">
+                <img
+                  class="quote-boxed-image"
+                  src="people/young-man-sad-expression_1194-2826.avif"
+                  alt="Samantha Smith"
+                  width="210"
+                  height="210"
+                />
+              </div>
+              <div class="quote-boxed-main">
+                <div class="quote-boxed-text">
+                  <p>
+                    Exploring the Sinai Peninsula with Sealine Travel was absolutely incredible! The Red Sea diving experience was world-class with crystal clear waters and vibrant coral reefs teeming with marine life. Visiting Saint Catherine's Monastery, one of the world's oldest Christian monasteries, was a profound spiritual experience. The Mount Sinai sunrise was absolutely breathtaking - watching the sun rise over the desert was a moment I'll treasure forever. The Bedouin hospitality and authentic experiences made this journey truly special and unforgettable!
+                  </p>
+                </div>
+                <div class="quote-boxed-meta">
+                  <p class="quote-boxed-cite">Samantha Smith</p>
+                  <p class="quote-boxed-small">Regular Customer</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section section-md text-center text-md-left bg-gray-700 novi-background bg-cover"
+      >
+        <div class="container container-wide">
+          <div class="row row-fix row-50 justify-content-sm-center">
+            <div class="col-xxl-8">
+              <div class="box-cta box-cta-inline">
+                <div class="box-cta-inner">
+                  <h3 class="box-cta-title">
+                    Buy a tour without leaving your home
+                  </h3>
+                  <p>
+                    Using our website, you can book any tour just in a couple of
+                    clicks.
+                  </p>
+                </div>
+                <div class="box-cta-inner">
+                  <a class="button button-secondary button-nina" href="#"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Minimal-->
+      <footer
+        class="section page-footer page-footer-minimal novi-background bg-cover text-center bg-gray-darker"
+      >
+        <div class="container container-wide">
+          <div
+            class="row row-fix justify-content-sm-center align-items-md-center row-30"
+          >
+            <div class="col-md-10 col-lg-7 col-xl-4 text-xl-left">
+              <a href="index.html"
+                ><img
+                  class="inverse-logo"
+                  src="images/logo/logo.png"
+                  alt="Sealine Travel Logo"
+                  width="208"
+                  height="46"
+              /></a>
+            </div>
+            <div class="col-md-10 col-lg-7 col-xl-4">
+              <p class="right">
+                &#169;&nbsp;<span class="copyright-year"></span> All Rights
+                Reserved. Design&nbsp;by&nbsp;<a
+                  href="#"
+                  >Egypt-Tours</a
+                >
+              </p>
+            </div>
+            <div class="col-md-10 col-lg-7 col-xl-4 text-xl-right">
+              <ul class="group-xs group-middle">
+                <li>
+                  <a
+                    class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-facebook"
+                    href="#"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-twitter"
+                    href="#"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-instagram"
+                    href="#"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-google"
+                    href="#"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-linkedin"
+                    href="#"
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="js/config.js"></script>
+    <script src="js/index-tours.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    <!-- coded by barber-->
+  </body>
+</html>

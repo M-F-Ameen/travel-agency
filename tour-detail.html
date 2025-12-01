@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <!-- Site Title-->
+    <title>Tour Details</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald:200,400%7CLato:300,400,300italic,700%7CMontserrat:900" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <style>
+      .row.mb-4 {
+        margin-bottom: 1rem !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tour-gallery {
+        width: 100%;
+        height: 100%;
+        min-height: 350px;
+        max-height: 650px;
+        overflow: hidden;
+        border-radius: 15px;
+        position: relative;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.05) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 15px 30px rgba(0, 0, 0, 0.3), 
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: perspective(1000px) rotateX(2deg);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .tour-gallery::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, transparent 100%);
+        border-radius: 15px 15px 0 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .tour-gallery:hover {
+        transform: perspective(1000px) rotateX(0deg) translateY(-8px) scale(1.02);
+        box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      .tour-gallery img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: all 0.3s ease;
+        display: block;
+      }
+      .tour-gallery:hover img {
+        transform: scale(1.03);
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 767px) {
+        .container-fluid {
+          max-width: 95% !important;
+          padding: 0 15px !important;
+        }
+        
+        .tour-gallery {
+          min-height: 200px;
+          margin-bottom: 20px;
+        }
+        
+        .row.mb-4 {
+          margin-bottom: 1.5rem !important;
+          flex-direction: column;
+        }
+        
+        .booking-form {
+          padding: 20px 15px !important;
+          margin-top: 20px;
+          position: relative !important;
+          top: 0 !important;
+        }
+        
+        .booking-form h3 {
+          font-size: 20px;
+          margin-bottom: 15px;
+        }
+        
+        .tour-description {
+          font-size: 16px;
+          line-height: 1.6;
+          padding: 0 5px;
+        }
+        
+        #tour-title {
+          font-size: 24px;
+          margin-bottom: 20px;
+          padding: 0 5px;
+        }
+        
+        .btn-primary {
+          padding: 12px 25px;
+          font-size: 16px;
+        }
+        
+        .form-group {
+          margin-bottom: 15px;
+        }
+        
+        /* Fix form layout on mobile */
+        .form-row .form-group.col-6 {
+          flex: 0 0 100%;
+          max-width: 100%;
+          margin-bottom: 10px;
+        }
+        
+        .compact-input, .compact-textarea {
+          font-size: 16px; /* Prevents zoom on iOS */
+          padding: 12px 15px;
+          width: 100% !important;
+          box-sizing: border-box;
+        }
+        
+        .small-label {
+          font-size: 12px;
+          margin-bottom: 8px;
+        }
+      }
+      
+      /* Extra small devices (phones in portrait) */
+      @media (max-width: 480px) {
+        .container-fluid {
+          max-width: 98% !important;
+          padding: 0 10px !important;
+        }
+        
+        .tour-gallery {
+          min-height: 180px;
+          margin-bottom: 15px;
+        }
+        
+        .booking-form {
+          padding: 15px 10px !important;
+          margin-top: 15px;
+        }
+        
+        .booking-form h3 {
+          font-size: 18px;
+          margin-bottom: 12px;
+        }
+        
+        #tour-title {
+          font-size: 22px;
+          margin-bottom: 15px;
+        }
+        
+        .tour-description {
+          font-size: 15px;
+          line-height: 1.5;
+        }
+        
+        .btn-primary {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+        
+        .form-row {
+          margin-bottom: 0;
+        }
+        
+        /* Fix form layout on extra small screens */
+        .form-row .form-group.col-6 {
+          flex: 0 0 100%;
+          max-width: 100%;
+          margin-bottom: 8px;
+        }
+        
+        .compact-input, .compact-textarea {
+          padding: 10px 12px;
+          width: 100% !important;
+          box-sizing: border-box;
+        }
+      }
+      
+      /* Tablet responsiveness */
+      @media (min-width: 768px) and (max-width: 991px) {
+        .container-fluid {
+          max-width: 90% !important;
+          padding: 0 20px !important;
+        }
+        
+        .booking-form {
+          padding: 20px !important;
+        }
+        
+        .tour-gallery {
+          min-height: 250px;
+        }
+      }
+      
+      /* Header responsiveness for mobile */
+      @media (max-width: 767px) {
+        .rd-navbar-top-panel {
+          display: none !important;
+        }
+        
+        .rd-navbar-aside-right {
+          display: none !important;
+        }
+        
+        .rd-navbar-brand img {
+          width: 150px !important;
+          height: auto !important;
+        }
+        
+        .rd-navbar-panel {
+          padding: 10px 0;
+        }
+      }
+      
+      /* Section spacing for mobile */
+      @media (max-width: 767px) {
+        .section {
+          padding: 30px 0 !important;
+        }
+        
+        .page-footer {
+          padding: 30px 0 !important;
+        }
+      }
+      
+      .tour-description {
+        font-size: 18px;
+        line-height: 1.8;
+        color: #333;
+        text-align: justify;
+      }
+      .booking-form {
+        background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e9ecef;
+        position: sticky;
+        top: 20px;
+      }
+      .booking-form h3 {
+        color: #D4AF37;
+        font-weight: 700;
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: center;
+      }
+      .booking-form .form-group {
+        margin-bottom: 18px;
+      }
+      .booking-form .small-label {
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 6px;
+        display: block;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .booking-form .compact-input {
+        border: 2px solid #e1e5e9;
+        border-radius: 6px;
+        padding: 10px 12px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background-color: #fff;
+      }
+      .booking-form .compact-input:focus {
+        border-color: #D4AF37;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        outline: none;
+      }
+      .booking-form .compact-textarea {
+        border: 2px solid #e1e5e9;
+        border-radius: 6px;
+        padding: 10px 12px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background-color: #fff;
+        resize: vertical;
+        min-height: 60px;
+      }
+      .booking-form .compact-textarea:focus {
+        border-color: #D4AF37;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        outline: none;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+        border: none;
+        padding: 15px 40px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 18px;
+        color: #2c3e50;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-primary:hover {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        color: #2c3e50;
+      }
+      .btn-lg {
+        padding: 15px 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Page preloader-->
+    <div class="page-loader">
+      <div class="page-loader-body">
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page-->
+    <div class="page">
+      <!-- Page Header-->
+      <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap rd-navbar-corporate">
+          <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-device-layout="rd-navbar-static" data-md-stick-up-offset="130px" data-lg-stick-up-offset="100px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true">
+            <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse">
+              <span></span>
+            </div>
+            <div class="rd-navbar-top-panel rd-navbar-collapse novi-background">
+              <div class="rd-navbar-top-panel-inner">
+                <ul class="list-inline">
+                  <li class="box-inline list-inline-item">
+                    <span class="icon novi-icon icon-md-smaller icon-secondary mdi mdi-phone"></span>
+                    <ul class="list-comma">
+                      <li><a href="tel:#">+20 10 09059295</a></li>
+                      <li><a href="tel:#">+20 10 93725768</a></li>
+                    </ul>
+                  </li>
+                  <li class="box-inline list-inline-item">
+                    <span class="icon novi-icon icon-md-smaller icon-secondary mdi mdi-map-marker"></span>
+                    <a href="#">Huradah Egypt main street 111</a>
+                  </li>
+                  <li class="box-inline list-inline-item">
+                    <span class="icon novi-icon icon-md-smaller icon-secondary mdi mdi-email"></span>
+                    <a href="mailto:#">mail@demolink.org</a>
+                  </li>
+                </ul>
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="rd-navbar-top-panel-inner">
+                <a class="button button-sm button-secondary button-nina" href="https://www.templatemonster.com/website-templates/62466.html" target="_blank">buy template now</a>
+              </div>
+            </div>
+            <div class="rd-navbar-inner">
+              <!-- RD Navbar Panel-->
+              <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap">
+                  <span></span>
+                </button>
+                <!-- RD Navbar Brand-->
+                <div class="rd-navbar-brand">
+                  <a class="brand-name" href="index.html">
+                    <img class="logo-default" src="images/logo/logo.png" alt="Sealine Travel Logo" width="208" height="46" />
+                    <img class="logo-inverse" src="images/logo/logo.png" alt="Sealine Travel Logo" width="208" height="46" />
+                  </a>
+                </div>
+              </div>
+              <div class="rd-navbar-aside-center">
+                <div class="rd-navbar-nav-wrap">
+                  <!-- RD Navbar Nav-->
+                  <ul class="rd-navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                   
+                  </ul>
+                </div>
+              </div>
+              <div class="rd-navbar-aside-right">
+                <a class="button button-sm button-secondary button-nina" href="#">Book a tour now</a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Tour Details Section -->
+      <section class="section">
+        <div class="container-fluid" style="max-width: 90%; margin: 0 auto 30px auto;">
+          <!-- Tour Header -->
+          <div class="row mb-4">
+            <!-- Tour Image -->
+            <div class="col-lg-8">
+              <div class="tour-gallery">
+                <img id="tour-image" src="" alt="Tour Image" class="img-fluid rounded" />
+              </div>
+            </div>
+            <!-- Booking Form -->
+            <div class="col-lg-4">
+              <div class="booking-form" style="padding: 20px;">
+                <h3 class="mb-3">Book Now</h3>
+                <form id="booking-form">
+                  <!-- Contact Info -->
+                  <div class="form-row mb-2">
+                    <div class="form-group col-12">
+                      <label for="name" class="small-label">Full Name</label>
+                      <input type="text" id="name" name="name" required class="form-control compact-input" placeholder="Your full name" />
+                    </div>
+                  </div>
+
+                  <div class="form-row mb-2">
+                    <div class="form-group col-6">
+                      <label for="phone" class="small-label">Phone</label>
+                      <input type="tel" id="phone" name="phone" required class="form-control compact-input" placeholder="+1-555-0123" />
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="email" class="small-label">Email</label>
+                      <input type="email" id="email" name="email" required class="form-control compact-input" placeholder="your@email.com" />
+                    </div>
+                  </div>
+
+                  <!-- Travelers -->
+                  <div class="form-row mb-2">
+                    <div class="form-group col-6">
+                      <label for="adults" class="small-label">Adults</label>
+                      <input type="number" id="adults" name="adults" min="1" required class="form-control compact-input" value="1" />
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="children" class="small-label">Children</label>
+                      <input type="number" id="children" name="children" min="0" class="form-control compact-input" value="0" />
+                    </div>
+                  </div>
+
+                  <!-- Travel Date -->
+                  <div class="form-group mb-3">
+                    <label for="travel-date" class="small-label">Travel Date</label>
+                    <input type="date" id="travel-date" name="travel-date" required class="form-control compact-input" />
+                  </div>
+
+                  <!-- Confirm Trip Name -->
+                  <div class="form-group mb-3">
+                    <label for="confirm-trip" class="small-label">Confirm Trip Name</label>
+                    <input type="text" id="confirm-trip" name="confirm-trip" required class="form-control compact-input" placeholder="Enter the trip name to confirm" readonly />
+                    <small class="text-muted">This field is pre-filled with the correct trip name</small>
+                  </div>
+
+                  <!-- Hidden Tour ID -->
+                  <input type="hidden" id="tour-id" name="tour-id" />
+
+                  <!-- Message -->
+                  <div class="form-group mb-3">
+                    <label for="message" class="small-label">Special Requests</label>
+                    <textarea id="message" name="message" rows="2" class="form-control compact-textarea" placeholder="Any special requirements or questions..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-sm" style="width: 100%; font-size: 16px; padding: 10px 20px;">Reserve Your Spot</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tour Description -->
+          <div class="row">
+            <div class="col-12">
+              <h2 id="tour-title" class="mb-4">Tour Title</h2>
+              <p id="tour-description" class="tour-description">
+                Detailed description of the tour goes here. This will be expanded with comprehensive information about the destination, activities, accommodations, and unique experiences.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Minimal-->
+      <footer class="section page-footer page-footer-minimal novi-background bg-cover text-center bg-gray-darker">
+        <div class="container container-wide">
+          <div class="row row-fix justify-content-sm-center align-items-md-center row-30">
+            <div class="col-md-10 col-lg-7 col-xl-4 text-xl-left">
+              <a href="index.html">
+                <img class="inverse-logo" src="images/logo/logo.png" alt="Sealine Travel Logo" width="208" height="46" />
+              </a>
+            </div>
+            <div class="col-md-10 col-lg-7 col-xl-4">
+              <p class="right">
+                &#169;&nbsp;<span class="copyright-year"></span> All Rights Reserved. Design&nbsp;by&nbsp;<a href="https://www.templatemonster.com">TemplateMonster</a>
+              </p>
+            </div>
+            <div class="col-md-10 col-lg-7 col-xl-4 text-xl-right">
+              <ul class="group-xs group-middle">
+                <li>
+                  <a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-facebook" href="#"></a>
+                </li>
+                <li>
+                  <a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-twitter" href="#"></a>
+                </li>
+                <li>
+                  <a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-instagram" href="#"></a>
+                </li>
+                <li>
+                  <a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-google"></a>
+                </li>
+                <li>
+                  <a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-linkedin" href="#"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="js/config.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Load config if not already loaded
+        if (!window.Config) {
+          console.error('Config module not loaded');
+          return;
+        }
+
+        // Parse tour ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const tourId = urlParams.get('tour');
+
+        if (!tourId) {
+          showTourNotFound();
+          return;
+        }
+
+        // Load and display tour data from API
+        loadTourData(tourId);
+      });
+
+      async function loadTourData(tourId) {
+        try {
+          // Fetch tour data from API
+          const response = await Config.api.getTour(tourId);
+          const result = await response.json();
+
+          if (result.success) {
+            const tour = result.data;
+            document.getElementById('tour-title').textContent = tour.title;
+            document.getElementById('tour-image').src = tour.imageUrl;
+            document.getElementById('tour-description').textContent = tour.description;
+
+            // Pre-fill the confirm-trip field and set tour-id
+            document.getElementById('confirm-trip').value = tour.title;
+            document.getElementById('tour-id').value = tourId;
+          } else {
+            showTourNotFound();
+          }
+        } catch (error) {
+          console.error('Error loading tour:', error);
+          showTourNotFound();
+        }
+      }
+
+      function showTourNotFound() {
+        document.getElementById('tour-title').textContent = 'Tour Not Found';
+        document.getElementById('tour-description').textContent = 'The selected tour could not be found. Please return to the main page and select a valid tour.';
+        document.getElementById('tour-image').src = '';
+        document.getElementById('confirm-trip').value = '';
+        document.getElementById('tour-id').value = '';
+      }
+    </script>
+  </body>
+</html>
